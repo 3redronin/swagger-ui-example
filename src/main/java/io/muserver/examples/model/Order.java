@@ -16,7 +16,6 @@
 
 package io.muserver.examples.model;
 
-import io.swagger.annotations.*;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -67,7 +66,7 @@ public class Order {
   }
 
   @XmlElement(name = "status")
-  @ApiModelProperty(value = "Order Status", allowableValues = "placed, approved, delivered")
+//  @ApiModelProperty(value = "Order Status", allowableValues = "placed, approved, delivered")
   public String getStatus() {
     return status;
   }

@@ -16,23 +16,20 @@
 
 package io.muserver.examples.model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.swagger.annotations.ApiModelProperty;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Vehicle")
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME, // Were binding by providing a name
-        include = JsonTypeInfo.As.PROPERTY, // The name is provided in a property
-        property = "type", // Property name is type
-        visible = true // Retain the value of type after deserialisation
-)
-@JsonSubTypes({//Below, we define the names and the binding classes.
-        @JsonSubTypes.Type(value = Car.class, name = "Car"),
-})
+//@JsonTypeInfo(
+//        use = JsonTypeInfo.Id.NAME, // Were binding by providing a name
+//        include = JsonTypeInfo.As.PROPERTY, // The name is provided in a property
+//        property = "type", // Property name is type
+//        visible = true // Retain the value of type after deserialisation
+//)
+//@JsonSubTypes({//Below, we define the names and the binding classes.
+//        @JsonSubTypes.Type(value = Car.class, name = "Car"),
+//})
 
 public class Vehicle {
   private long id;
@@ -48,7 +45,7 @@ public class Vehicle {
   }
 
   @XmlElement(name = "name")
-  @ApiModelProperty(example = "kit", required = true)
+//  @ApiModelProperty(example = "kit", required = true)
   public String getName() {
     return name;
   }
@@ -59,7 +56,7 @@ public class Vehicle {
 
   private String type;
 
-  @ApiModelProperty(required = true)
+//  @ApiModelProperty(required = true)
   public String getType() {
     return type;
   }

@@ -16,7 +16,6 @@
 
 package io.muserver.examples.resource;
 
-import io.swagger.annotations.*;
 import io.muserver.examples.data.PetData;
 import io.muserver.examples.data.StoreData;
 import io.muserver.examples.model.Order;
@@ -26,7 +25,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/store")
-@Api(value="/store" , description = "Operations about store")
+//@Api(value="/store" , description = "Operations about store")
 @Produces({"application/json", "application/xml"})
 public class PetStoreResource {
   static StoreData storeData = new StoreData();
@@ -35,54 +34,54 @@ public class PetStoreResource {
   @GET
   @Path("/inventory")
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  @ApiOperation(value = "Returns pet inventories by status", 
-    notes = "Returns a map of status codes to quantities", 
-    response = Integer.class,
-    responseContainer = "map",
-    authorizations = @Authorization(value = "api_key")
-  )
+//  @ApiOperation(value = "Returns pet inventories by status",
+//    notes = "Returns a map of status codes to quantities",
+//    response = Integer.class,
+//    responseContainer = "map",
+//    authorizations = @Authorization(value = "api_key")
+//  )
   public java.util.Map<String, Integer> getInventory() {
     return petData.getInventoryByStatus();
   }
 
   @GET
   @Path("/order/{orderId}")
-  @ApiOperation(value = "Find purchase order by ID",
-    notes = "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
-    response = Order.class)
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-      @ApiResponse(code = 404, message = "Order not found") })
+//  @ApiOperation(value = "Find purchase order by ID",
+//    notes = "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+//    response = Order.class)
+//  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
+//      @ApiResponse(code = 404, message = "Order not found") })
   public Response getOrderById(
-      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true)
+//      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true)
       @PathParam("orderId") Long orderId)
       throws NotFoundException {
     Order order = storeData.findOrderById(orderId);
     if (null != order) {
       return Response.ok().entity(order).build();
     } else {
-      throw new NotFoundException(404, "Order not found");
+      throw new NotFoundException("Order not found");
     }
   }
 
   @POST
   @Path("/order")
-  @ApiOperation(value = "Place an order for a pet")
-  @ApiResponses({ @ApiResponse(code = 400, message = "Invalid Order") })
+//  @ApiOperation(value = "Place an order for a pet")
+//  @ApiResponses({ @ApiResponse(code = 400, message = "Invalid Order") })
   public Order placeOrder(
-      @ApiParam(value = "order placed for purchasing the pet",
-        required = true) Order order) {
+//      @ApiParam(value = "order placed for purchasing the pet", required = true)
+		      Order order) {
     storeData.placeOrder(order);
     return storeData.placeOrder(order);
   }
 
   @DELETE
   @Path("/order/{orderId}")
-  @ApiOperation(value = "Delete purchase order by ID",
-    notes = "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-      @ApiResponse(code = 404, message = "Order not found") })
+//  @ApiOperation(value = "Delete purchase order by ID",
+//    notes = "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors")
+//  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
+//      @ApiResponse(code = 404, message = "Order not found") })
   public Response deleteOrder(
-      @ApiParam(value = "ID of the order that needs to be deleted", allowableValues = "range[1,infinity]", required = true)
+//      @ApiParam(value = "ID of the order that needs to be deleted", allowableValues = "range[1,infinity]", required = true)
       @PathParam("orderId") Long orderId) {
     if (storeData.deleteOrder(orderId)) {
       return Response.ok().entity("").build();

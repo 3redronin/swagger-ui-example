@@ -16,8 +16,6 @@
 
 package io.muserver.examples.model;
 
-import io.swagger.annotations.*;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "Pet")
-@ApiModel(value = "Pet", subTypes = {Cat.class}, discriminator = "type")
+//@ApiModel(value = "Pet", subTypes = {Cat.class}, discriminator = "type")
 public class Pet {
   private long id;
   private Category category;
@@ -53,7 +51,7 @@ public class Pet {
   }
 
   @XmlElement(name = "name")
-  @ApiModelProperty(example = "doggie", required = true)
+//  @ApiModelProperty(example = "doggie", required = true)
   public String getName() {
     return name;
   }
@@ -83,7 +81,7 @@ public class Pet {
   }
 
   @XmlElement(name = "status")
-  @ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
+//  @ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
   public String getStatus() {
     return status;
   }
@@ -94,7 +92,7 @@ public class Pet {
 
   private String type;
 
-  @ApiModelProperty(required = true)
+//  @ApiModelProperty(required = true)
   public String getType() {
     return type;
   }
