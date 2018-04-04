@@ -1,6 +1,10 @@
 package io.muserver.examples;
 
 import io.muserver.MuServer;
+import io.muserver.examples.resource.PetResource;
+import io.muserver.examples.resource.PetStoreResource;
+import io.muserver.examples.resource.UserResource;
+import io.muserver.examples.resource.VehicleResource;
 import io.muserver.handlers.ResourceHandler;
 import io.muserver.rest.RestHandlerBuilder;
 
@@ -11,7 +15,9 @@ public class App {
 	public static void main(String[] args) {
 		MuServer server = httpServer()
 				.withHttpConnection(10100)
-				.addHandler(RestHandlerBuilder.restHandler(new User()))
+				.addHandler(RestHandlerBuilder.restHandler(
+						new PetResource(), new PetStoreResource(), new UserResource(), new VehicleResource()
+				))
 
 				// Use the index.html from our own resource folder
 				.addHandler(ResourceHandler.fileOrClasspath("src/main/resources/swagger-overrides", "/swagger-overrides")
